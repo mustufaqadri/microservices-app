@@ -1,6 +1,5 @@
 package com.dev.ecommerce.orderline;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
