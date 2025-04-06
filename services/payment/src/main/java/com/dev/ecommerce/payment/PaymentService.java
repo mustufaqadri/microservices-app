@@ -2,7 +2,6 @@ package com.dev.ecommerce.payment;
 
 import com.dev.ecommerce.notification.NotificationProducer;
 import com.dev.ecommerce.notification.PaymentNotificationRequest;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ public class PaymentService {
     private final PaymentMapper mapper;
     private final NotificationProducer notificationProducer;
 
-    public Integer createPayment(@Valid PaymentRequest request) {
+    public Integer createPayment(PaymentRequest request) {
         var payment = repository.save(mapper.toPayment(request));
 
         notificationProducer.sendNotification(

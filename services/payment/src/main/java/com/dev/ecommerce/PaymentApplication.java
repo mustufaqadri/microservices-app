@@ -1,4 +1,4 @@
-package com.dev.ecommerce.payment;
+package com.dev.ecommerce;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -5,6 +5,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -27,9 +28,15 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
     private final SpringTemplateEngine templateEngine;
+    @Value("${spring.mail.port}")
+    private int mailPort;
 
     @Async
     public void sendPaymentSuccessEmail(String customerEmail, String customerName, BigDecimal amount, String orderReference) throws MessagingException {
+        System.out.println("\n MAIL PORT: " + mailPort);
+        if (mailSender instanceof org.springframework.mail.javamail.JavaMailSenderImpl impl) {
+            System.out.println("💡 JavaMailSender Config → Host: " + impl.getHost() + ", Port: " + impl.getPort());
+        }
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, MULTIPART_MODE_RELATED, UTF_8.name());
         helper.setFrom("contact@dev.com");
